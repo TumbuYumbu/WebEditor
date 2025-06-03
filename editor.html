@@ -23,6 +23,8 @@
   <script>
     Telegram.WebApp.ready();  // гарантируем инициализацию
 
+    alert("function submitData()");
+    
     function submitData() {
       const rows = document.querySelectorAll("#table tr");
       const data = [];
@@ -37,6 +39,9 @@
           });
         }
       });
+
+      alert("Отправляю данные: " + JSON.stringify(data));
+
       Telegram.WebApp.sendData(JSON.stringify(data));
       Telegram.WebApp.close();
     }
