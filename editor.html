@@ -21,6 +21,8 @@
   <button onclick="submitData()">Сохранить</button>
 
   <script>
+    Telegram.WebApp.ready();  // гарантируем инициализацию
+
     function submitData() {
       const rows = document.querySelectorAll("#table tr");
       const data = [];
@@ -39,5 +41,6 @@
       Telegram.WebApp.close();
     }
   </script>
+
 </body>
 </html>
