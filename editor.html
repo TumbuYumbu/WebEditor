@@ -21,37 +21,26 @@
   <button onclick="submitData()">Сохранить</button>
 
   <script>
-    Telegram.WebApp.ready();  // гарантируем инициализацию
-
-    alert("function submitData()");
-
-    function submitData() {
-      alert("1");
-      const rows = document.querySelectorAll("#table tr");
-      const data = [];
-      rows.forEach((row, idx) => {
-        if (idx === 0) return;
-        const cells = row.querySelectorAll("input");
-        if (cells.length === 3) {
-          data.push({
-            word: cells[0].value,
-            translation: cells[1].value,
-            example: cells[2].value
-          });
-        }
-      });
-      const json = JSON.stringify(data);
-      alert("Отправляем в Telegram: " + json);
-      if (Telegram.WebApp.sendData) {
-        Telegram.WebApp.sendData(json);
-        Telegram.WebApp.close();
-      } else {
-        alert("Telegram.WebApp.sendData не определён");
+  function submitData() {
+    alert("1");  // <--- первый отладочный алерт
+    const rows = document.querySelectorAll("#table tr");
+    const data = [];
+    rows.forEach((row, idx) => {
+      if (idx === 0) return;  // пропускаем заголовки
+      const cells = row.querySelectorAll("input");
+      if (cells.length === 3) {
+        data.push({
+          word: cells[0].value,
+          translation: cells[1].value,
+          example: cells[2].value
+        });
       }
-    }
-
-
-  </script>
+    });
+    alert("2"); // <--- второй отладочный алерт
+    Telegram.WebApp.sendData(JSON.stringify(data));
+    Telegram.WebApp.close();
+  }
+</script>
 
 </body>
 </html>
