@@ -24,12 +24,12 @@
     Telegram.WebApp.ready();  // гарантируем инициализацию
 
     alert("function submitData()");
-    
+
     function submitData() {
       const rows = document.querySelectorAll("#table tr");
       const data = [];
       rows.forEach((row, idx) => {
-        if (idx === 0) return;  // пропускаем заголовки
+        if (idx === 0) return;
         const cells = row.querySelectorAll("input");
         if (cells.length === 3) {
           data.push({
@@ -39,12 +39,17 @@
           });
         }
       });
-
-      alert("Отправляю данные: " + JSON.stringify(data));
-
-      Telegram.WebApp.sendData(JSON.stringify(data));
-      Telegram.WebApp.close();
+      const json = JSON.stringify(data);
+      alert("Отправляем в Telegram: " + json);
+      if (Telegram?.WebApp?.sendData) {
+        Telegram.WebApp.sendData(json);
+        Telegram.WebApp.close();
+      } else {
+        alert("Telegram.WebApp.sendData не определён");
+      }
     }
+
+
   </script>
 
 </body>
