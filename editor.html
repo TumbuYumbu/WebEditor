@@ -26,6 +26,7 @@
     alert("function submitData()");
 
     function submitData() {
+      alert("1");
       const rows = document.querySelectorAll("#table tr");
       const data = [];
       rows.forEach((row, idx) => {
@@ -41,7 +42,7 @@
       });
       const json = JSON.stringify(data);
       alert("Отправляем в Telegram: " + json);
-      if (Telegram?.WebApp?.sendData) {
+      if (Telegram.WebApp.sendData) {
         Telegram.WebApp.sendData(json);
         Telegram.WebApp.close();
       } else {
